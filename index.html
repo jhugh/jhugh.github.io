@@ -15,6 +15,13 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+
+        <!-- HK exam code-->
+        <script src="js/main.js"></script>
+        <script src="js/skel.min.js"></script>
+        <script src="js/Converter.js"></script>
+        <script src="js/ConverterHelper.js"></script>
+
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -22,7 +29,69 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate 2.</p>
+        <div class="container">
+            <!-- Header -->
+            <div id="header" class="row">
+                <div class="4u">
+                    <h1>Example</h1>
+                </div>
+                <nav id="nav" class="8u">
+                    <a href="#">Home</a>
+                    <a href="#">About Me</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Contact</a>
+                </nav>
+            </div>
+            <!-- Hero -->
+            <section id="hero">
+                <h2>Hugh Kelly Converter</h2>
+                <p>Convert lbs to kgs and vice versa</p>
+                <a href="#" class="button">Get Started</a>
+            </section>
+            <!-- Features -->
+            <div class="row">
+                <section class="4u">
+                    <h2>Imperial Weight In Pounds</h2>
+                    <input id="poundweight" type="number" />
+                </section>
+                <section class="4u">
+                    <h2>Metric Weight In KGs</h2>
+                    <input id="metricweight" type="number" />
+                </section>
+                <section class="4u">
+                    <h2>Converted Value</h2>
+                    <button id="calculatebutton" onclick="ConverterHelper.calcByContext('poundweight','metricweight')">Calculate</button>
+                </section>
+            </div>
+            <!-- Main -->
+            <div class="row">
+                <!-- Content -->
+                <section class="8u">
+                    <h2>Heading</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet sed magna etiam adipiscing elit.
+                        adipiscing elit nec fringilla urna tempor in. Cras et sodales
+                        consectetur viverra lorem ipsum. Lorem ipsum dolor sit amet
+                        sed magna etiam adipiscing elit adipiscing elit nec fringilla
+                        urna tempor in. Cras et sodales consectetur viverra.
+                    </p>
+                </section>
+                <!-- Sidebar -->
+                <section class="4u">
+                    <h2>Heading</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet sed magna etiam adipiscing elit.
+                        adipiscing elit nec fringilla urna tempor in. Cras et sodales
+                        consectetur viverra lorem ipsum.
+                    </p>
+                </section>
+            </div>
+            <!-- Footer -->
+            <div id="footer">
+                &copy; Example. All rights reserved.
+            </div>
+        </div>
+
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>

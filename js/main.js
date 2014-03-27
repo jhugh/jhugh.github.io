@@ -11,10 +11,13 @@ window._skel_config = {
     }
 };
 
+var lastOperatorClicked;
+
 // non-jQuery JS functions
 document.addEventListener("DOMContentLoaded", function(event) { 
     var iElem = document.getElementById('ninput');    // get number to add/subtract/multiply/divide
     var oElem = document.getElementById('noutput');   // get number to be operated on
+
     document.getElementById('addbutton').onclick = function() {
         var inum = iElem.value; 
         var onum = parseFloat(oElem.value); 
@@ -24,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         else {
             oElem.value =  Calculator.addNumber(inum,onum);
         }
+        lastOperatorClicked="+";
     };
 
     document.getElementById('subtractbutton').onclick = function() {
@@ -35,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         else {
             oElem.value =  Calculator.subtractNumber(inum,onum);
         }
+        lastOperatorClicked="-";
     };
 
     document.getElementById('multiplybutton').onclick = function() {
@@ -46,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         else {
             oElem.value =  Calculator.multiplyNumber(inum,onum);
         }
+        lastOperatorClicked="*";
     };
 
     document.getElementById('dividebutton').onclick = function() {
@@ -57,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         else {
             oElem.value =  Calculator.divideNumber(inum,onum);
         }
+        lastOperatorClicked="/";
     };
 
     document.getElementById('clearbutton').onclick = function() {
@@ -101,6 +108,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
        putNum('.');
     };    
     
+    document.getElementById('equalsbutton').onclick = function() {
+        var inum = iElem.value; 
+        var onum = parseFloat(oElem.value); 
+        if (inum.length == 0) {
+            alert("Please set a number in input field")
+        }
+        else {
+            if (lastOperatorClicked == "+" ) oElem.value =  Calculator.addNumber(inum,onum);
+            if (lastOperatorClicked == "-" ) oElem.value =  Calculator.subtractNumber(inum,onum);
+            if (lastOperatorClicked == "*" ) oElem.value =  Calculator.multiplyNumber(inum,onum);
+            if (lastOperatorClicked == "/" ) oElem.value =  Calculator.divideNumber(inum,onum);
+        }
+    };
+
 });
 
 var putNum = function(digit) {

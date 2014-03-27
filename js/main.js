@@ -11,77 +11,86 @@ window._skel_config = {
     }
 };
 
-var lastOperatorClicked, mnum, opInProgress;
+var lastOperatorClicked="=" 
+var opInProgress = false;
 var num=0;
+var mnum=0;
 
 // non-jQuery JS functions
 document.addEventListener("DOMContentLoaded", function(event) { 
     var iElem = document.getElementById('ninput');    // get number to add/subtract/multiply/divide
-    //var oElem = document.getElementById('noutput');   // get number to be operated on
     if (iElem.value.length == 0) iElem.value = 0;
     
     document.getElementById('addbutton').onclick = function() {
-        var inum = iElem.value; 
-        //var onum = parseFloat(oElem.value); 
-        if (inum.length == 0) {
-            alert("Please set a number in input field")
+        if (opInProgress) {
+            var inum = iElem.value; 
+            doCalc(inum,num);
         }
-        //
-        //else {
-        //    iElem.value =  Calculator.addNumber(inum,num);
-        //}
         num = parseFloat(iElem.value);
         opInProgress = false;
         lastOperatorClicked="+";
     };
 
     document.getElementById('subtractbutton').onclick = function() {
-        var inum = iElem.value; 
-        //var onum = parseFloat(oElem.value); 
-        if (inum.length == 0) {
-            alert("Please set a number in input field")
+        if (opInProgress) {
+            var inum = iElem.value; 
+            doCalc(inum,num);
         }
-        //else {
-        //    iElem.value =  Calculator.subtractNumber(inum,num);
-        //}
         num = parseFloat(iElem.value);
         opInProgress = false;
         lastOperatorClicked="-";
     };
 
     document.getElementById('multiplybutton').onclick = function() {
-        var inum = iElem.value;
-        //var onum = parseFloat(oElem.value); 
-        if (inum.length == 0) {
-            alert("Please set a number in input field")
+        if (opInProgress) {
+            var inum = iElem.value; 
+            doCalc(inum,num);
         }
-        //else {
-        //    iElem.value =  Calculator.multiplyNumber(inum,num);
-        //}
         num = parseFloat(iElem.value);
         opInProgress = false;
         lastOperatorClicked="*";
     };
 
     document.getElementById('dividebutton').onclick = function() {
+        if (opInProgress) {
+            var inum = iElem.value; 
+            doCalc(inum,num);
+        }
+        num = parseFloat(iElem.value);
+        opInProgress = false;
+        lastOperatorClicked="/";
+    };
+
+    document.getElementById('equalsbutton').onclick = function() {
         var inum = iElem.value; 
         //var onum = parseFloat(oElem.value); 
         if (inum.length == 0) {
             alert("Please set a number in input field")
         }
-        //else {
-        //    iElem.value =  Calculator.divideNumber(inum,num);
-        //}
-        num = parseFloat(iElem.value);
-        opInProgress = false;
-        lastOperatorClicked="/";
+        else {
+            doCalc(inum,num);
+            num = parseFloat(iElem.value);
+            opInProgress = false;
+            lastOperatorClicked="=";
+        }
     };
 
     document.getElementById('clearbutton').onclick = function() {
         iElem.value = 0;
         num = 0;
         opInProgress = false;
-        //oElem.value = 0;
+    };
+    
+    document.getElementById('maddbutton').onclick = function() {
+        mnum = mnum + parseFloat(iElem.value);
+    };
+
+    document.getElementById('msubtractbutton').onclick = function() {
+        mnum = mnum - parseFloat(iElem.value);
+    };
+    
+    document.getElementById('mreadbutton').onclick = function() {
+        iElem.value = mnum;
     };
     
     document.getElementById('btn0').onclick = function() {
@@ -143,21 +152,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
        putNum('.');
     };    
     
-    document.getElementById('equalsbutton').onclick = function() {
-        var inum = iElem.value; 
-        //var onum = parseFloat(oElem.value); 
-        if (inum.length == 0) {
-            alert("Please set a number in input field")
-        }
-        else {
-            if (lastOperatorClicked == "+" ) iElem.value =  Calculator.addNumber(inum,num);
-            if (lastOperatorClicked == "-" ) iElem.value =  Calculator.subtractNumber(inum,num);
-            if (lastOperatorClicked == "*" ) iElem.value =  Calculator.multiplyNumber(inum,num);
-            if (lastOperatorClicked == "/" ) iElem.value =  Calculator.divideNumber(inum,num);
-            num = parseFloat(iElem.value);
-            opInProgress = false;
-        }
-    };
 
 });
 
@@ -166,11 +160,16 @@ var putNum = function(digit) {
         document.getElementById('ninput').value = digit;
     }
     else {
-        document.getElementById('ninput').value = parseFloat(document.getElementById('ninput').value.toString() + digit);
+        document.getElementById('ninput').value = document.getElementById('ninput').value.toString() + digit;
     }
 };
 
-    
+var doCalc = function(inum,num) {            
+    if (lastOperatorClicked == "+" ) document.getElementById('ninput').value =  Calculator.addNumber(inum,num);
+    if (lastOperatorClicked == "-" ) document.getElementById('ninput').value =  Calculator.subtractNumber(inum,num);
+    if (lastOperatorClicked == "*" ) document.getElementById('ninput').value =  Calculator.multiplyNumber(inum,num);
+    if (lastOperatorClicked == "/" ) document.getElementById('ninput').value =  Calculator.divideNumber(inum,num);
+};
 
 
 

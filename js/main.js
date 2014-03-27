@@ -11,114 +11,151 @@ window._skel_config = {
     }
 };
 
-var lastOperatorClicked;
+var lastOperatorClicked, mnum, opInProgress;
+var num=0;
 
 // non-jQuery JS functions
 document.addEventListener("DOMContentLoaded", function(event) { 
     var iElem = document.getElementById('ninput');    // get number to add/subtract/multiply/divide
-    var oElem = document.getElementById('noutput');   // get number to be operated on
-
+    //var oElem = document.getElementById('noutput');   // get number to be operated on
+    if (iElem.value.length == 0) iElem.value = 0;
+    
     document.getElementById('addbutton').onclick = function() {
         var inum = iElem.value; 
-        var onum = parseFloat(oElem.value); 
+        //var onum = parseFloat(oElem.value); 
         if (inum.length == 0) {
             alert("Please set a number in input field")
         }
-        else {
-            oElem.value =  Calculator.addNumber(inum,onum);
-        }
+        //
+        //else {
+        //    iElem.value =  Calculator.addNumber(inum,num);
+        //}
+        num = parseFloat(iElem.value);
+        opInProgress = false;
         lastOperatorClicked="+";
     };
 
     document.getElementById('subtractbutton').onclick = function() {
         var inum = iElem.value; 
-        var onum = parseFloat(oElem.value); 
+        //var onum = parseFloat(oElem.value); 
         if (inum.length == 0) {
             alert("Please set a number in input field")
         }
-        else {
-            oElem.value =  Calculator.subtractNumber(inum,onum);
-        }
+        //else {
+        //    iElem.value =  Calculator.subtractNumber(inum,num);
+        //}
+        num = parseFloat(iElem.value);
+        opInProgress = false;
         lastOperatorClicked="-";
     };
 
     document.getElementById('multiplybutton').onclick = function() {
         var inum = iElem.value;
-        var onum = parseFloat(oElem.value); 
+        //var onum = parseFloat(oElem.value); 
         if (inum.length == 0) {
             alert("Please set a number in input field")
         }
-        else {
-            oElem.value =  Calculator.multiplyNumber(inum,onum);
-        }
+        //else {
+        //    iElem.value =  Calculator.multiplyNumber(inum,num);
+        //}
+        num = parseFloat(iElem.value);
+        opInProgress = false;
         lastOperatorClicked="*";
     };
 
     document.getElementById('dividebutton').onclick = function() {
         var inum = iElem.value; 
-        var onum = parseFloat(oElem.value); 
+        //var onum = parseFloat(oElem.value); 
         if (inum.length == 0) {
             alert("Please set a number in input field")
         }
-        else {
-            oElem.value =  Calculator.divideNumber(inum,onum);
-        }
+        //else {
+        //    iElem.value =  Calculator.divideNumber(inum,num);
+        //}
+        num = parseFloat(iElem.value);
+        opInProgress = false;
         lastOperatorClicked="/";
     };
 
     document.getElementById('clearbutton').onclick = function() {
-        iElem.value = "";
-        oElem.value = 0;
+        iElem.value = 0;
+        num = 0;
+        opInProgress = false;
+        //oElem.value = 0;
     };
     
     document.getElementById('btn0').onclick = function() {
+       if(!opInProgress) iElem.value = "";
+       opInProgress = true;
        putNum('0');
     };
     
     document.getElementById('btn1').onclick = function() {
+       if(!opInProgress) iElem.value = "";
+       opInProgress = true;
        putNum('1');
     };
 
     document.getElementById('btn2').onclick = function() {
+       if(!opInProgress) iElem.value = "";
+       opInProgress = true;
        putNum('2');
     };
 
     document.getElementById('btn3').onclick = function() {
+       if(!opInProgress) iElem.value = "";
+       opInProgress = true;
        putNum('3');
     };
     document.getElementById('btn4').onclick = function() {
+       if(!opInProgress) iElem.value = "";
+       opInProgress = true;
        putNum('4');
     };
     document.getElementById('btn5').onclick = function() {
+       if(!opInProgress) iElem.value = "";
+       opInProgress = true;
        putNum('5');
     };
     document.getElementById('btn6').onclick = function() {
+       if(!opInProgress) iElem.value = "";
+       opInProgress = true;
        putNum('6');
     };
     document.getElementById('btn7').onclick = function() {
+       if(!opInProgress) iElem.value = "";
+       opInProgress = true;
        putNum('7');
     };
     document.getElementById('btn8').onclick = function() {
+       if(!opInProgress) iElem.value = "";
+       opInProgress = true;
        putNum('8');
     };
     document.getElementById('btn9').onclick = function() {
+       if(!opInProgress) iElem.value = "";
+       opInProgress = true;
        putNum('9');
     };
     document.getElementById('btndot').onclick = function() {
+       if(!opInProgress) iElem.value = "";
+       opInProgress = true;
        putNum('.');
     };    
     
     document.getElementById('equalsbutton').onclick = function() {
         var inum = iElem.value; 
-        var onum = parseFloat(oElem.value); 
+        //var onum = parseFloat(oElem.value); 
         if (inum.length == 0) {
             alert("Please set a number in input field")
         }
         else {
-            if (lastOperatorClicked == "+" ) oElem.value =  Calculator.addNumber(inum,onum);
-            if (lastOperatorClicked == "-" ) oElem.value =  Calculator.subtractNumber(inum,onum);
-            if (lastOperatorClicked == "*" ) oElem.value =  Calculator.multiplyNumber(inum,onum);
-            if (lastOperatorClicked == "/" ) oElem.value =  Calculator.divideNumber(inum,onum);
+            if (lastOperatorClicked == "+" ) iElem.value =  Calculator.addNumber(inum,num);
+            if (lastOperatorClicked == "-" ) iElem.value =  Calculator.subtractNumber(inum,num);
+            if (lastOperatorClicked == "*" ) iElem.value =  Calculator.multiplyNumber(inum,num);
+            if (lastOperatorClicked == "/" ) iElem.value =  Calculator.divideNumber(inum,num);
+            num = parseFloat(iElem.value);
+            opInProgress = false;
         }
     };
 
